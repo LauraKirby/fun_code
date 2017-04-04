@@ -1,0 +1,1 @@
+require_relative '../lib/calculate_sum.rb'
