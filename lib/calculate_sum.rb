@@ -1,35 +1,58 @@
 require 'pry'
+require './constants'
+include Constants
+
+
+
 
 # @param {Integer[]} nums
 # @param {Integer} target
 # @return {Integer[]}
+# Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+# You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+
+# public int[] twoSum(int[] nums, int target) {
+#     Map<Integer, Integer> map = new HashMap<>();
+#     for (int i = 0; i < nums.length; i++) {
+#         int complement = target - nums[i];
+#         if (map.containsKey(complement)) {
+#             # return value if it is correct
+#             return new int[] { map.get(complement), i };
+#         }
+#         # add values to hash
+#         map.put(nums[i], i);
+#     }
+#     throw new IllegalArgumentException("No two sum solution");
+# }
+
+
 def two_sum(nums, target)
-  result = []
-  sum = 0
-
-  puts "target: #{target}  \n\n"
-  nums.each_with_index do | num, index_1 |
-
-    nums.each_with_index do | num_2, index_2 |
-      if index_2 != index_1
-        puts "num: #{num}, num_2: #{num_2}"
-
-        puts "result = [index_1: #{index_1}, index_2: #{index_2}]"
-        result = [index_1, index_2]
+  hash_map = {}
 
 
-        puts "add: #{nums[index_1]} + #{nums[index_2]}"
-        sum = nums[index_1] + nums[index_2]
 
-        return result if sum == target
-      end
+  sorted_nums.each_with_index do | num, index |
+    puts "num > target" if num > target
+    break if num > target
+    hash_map[index] = num
+  end
+
+
+  sorted_nums.each_with_index do | num_2, index_2 |
+    if index_2 != index_1
+      result = [index_1, index_2]
+      sum = nums[index_1] + nums[index_2]
+
+      return result if sum == target
     end
   end
+
 end
 
-# sum_result = two_sum([2,3,4,5], 6)
-# puts sum_result
 
+# sum_result = two_sum(ARRAY_INPUT, TARGET_SUM)
+# puts sum_result
 
 # @param {Integer} x
 # @return {Integer}
