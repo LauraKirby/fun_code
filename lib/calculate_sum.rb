@@ -1,36 +1,8 @@
 require 'pry'
+
 # @param {Integer[]} nums
 # @param {Integer} target
 # @return {Integer[]}
-# def two_sum(nums, target)
-#   nums = [2,3,2,8,5]
-#   result = []
-#   target = 4
-#   sum = 0
-
-#   nums.each_with_index do | num, index_1 |
-#     result = [index_1]
-#     puts result[0]
-#     return result if num + num_2 == target
-#     nums.each_with_index do | num_2, index_2 |
-#       i_2 = index_2 + 1
-#       result.push(index_2)
-#       puts "add #{nums[i]} + #{nums[index_2]}"
-#       return result if num + num_2 == target
-#     end
-
-#     puts result[0]
-#     return result
-#   end
-
-
-#     # i = 1
-#     # nums.each do |num|
-
-#     # end
-# end
-
-
 def two_sum(nums, target)
   result = []
   sum = 0
@@ -52,7 +24,38 @@ def two_sum(nums, target)
         return result if sum == target
       end
     end
-
   end
-
 end
+
+# sum_result = two_sum([2,3,4,5], 6)
+# puts sum_result
+
+
+# @param {Integer} x
+# @return {Integer}
+def reverse(x)
+    s = x.to_s
+    r = s.reverse
+    i = r.to_i
+    if s[0] == "-"
+      i = -i
+    end
+    puts i
+    return 0 if i > 2147483647 || i < -2147483648
+    i
+end
+
+
+# @param {Integer} x
+# @return {Boolean}
+def is_palindrome(x)
+  s = x.to_s.reverse
+  i = s.to_i
+  result = false
+  if s[0] == "-"
+    i = -i
+  end
+  result = true if x == i
+  return result
+end
+
