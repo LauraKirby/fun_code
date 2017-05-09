@@ -1,61 +1,53 @@
 require 'pry'
-require './constants'
+require_relative '../lib/constants.rb'
 include Constants
+# did_break = "unknown"
+# puts "num > target" if num > target
+# break if num > target
 
 
-
-
-# @param {Integer[]} nums
-# @param {Integer} target
-# @return {Integer[]}
+# param {Integer[]} nums
+# param {Integer} target
+# return {Integer[]}
 # Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 # You may assume that each input would have exactly one solution, and you may not use the same element twice.
 
-
-# public int[] twoSum(int[] nums, int target) {
-#     Map<Integer, Integer> map = new HashMap<>();
-#     for (int i = 0; i < nums.length; i++) {
-#         int complement = target - nums[i];
-#         if (map.containsKey(complement)) {
-#             # return value if it is correct
-#             return new int[] { map.get(complement), i };
-#         }
-#         # add values to hash
-#         map.put(nums[i], i);
-#     }
-#     throw new IllegalArgumentException("No two sum solution");
-# }
-
+# notes
+# target = 7
+# current index = 0
+# [2,3,4,7][0] = 2
+# target - 2 = 5
+# complement = 5
+# hash = {nums[index]: index}
 
 def two_sum(nums, target)
-  hash_map = {}
+  puts "target: #{target}"
+  @hash_map_sum = {}
 
-
-
-  sorted_nums.each_with_index do | num, index |
-    puts "num > target" if num > target
-    break if num > target
-    hash_map[index] = num
-  end
-
-
-  sorted_nums.each_with_index do | num_2, index_2 |
-    if index_2 != index_1
-      result = [index_1, index_2]
-      sum = nums[index_1] + nums[index_2]
-
-      return result if sum == target
+  nums.each_with_index do | num, index |
+    complement = target - nums[index]
+    if @hash_map_sum.key?(complement)
+      puts "complement #{complement}"
+      # return values in array format if correct total
+      puts "#{@hash_map_sum[complement]}, #{index}"
+      result = [@hash_map_sum[complement], index]
+      puts "results: [#{result[0]}, #{result[1]}]"
+      sum = LARGE_ARRAY[result[0]] + LARGE_ARRAY[index]
+      puts "sum: #{sum}"
+      puts "target: #{target}"
+      return result
     end
+    @hash_map_sum[nums[index]] = index
   end
 
+  puts "no two sum solution"
 end
 
+two_sum(LARGE_ARRAY, LARGE_SUM)
 
-# sum_result = two_sum(ARRAY_INPUT, TARGET_SUM)
-# puts sum_result
 
-# @param {Integer} x
-# @return {Integer}
+# param {Integer} x
+# return {Integer}
 def reverse(x)
     s = x.to_s
     r = s.reverse
@@ -69,8 +61,8 @@ def reverse(x)
 end
 
 
-# @param {Integer} x
-# @return {Boolean}
+# param {Integer} x
+# return {Boolean}
 def is_palindrome(x)
   s = x.to_s.reverse
   i = s.to_i
