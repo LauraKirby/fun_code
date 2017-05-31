@@ -4,9 +4,9 @@
 # @param {Integer} x
 # @return {Integer}
 
-def reverse_integer(input_integer)
-    input_string = input_integer.to_s
-    return input_integer if input_string.length == 1
+def reverse_integer(x)
+    input_string = x.to_s
+    return x if input_string.length == 1
 
     input_string_reversed = input_string.reverse
     input_integer_reversed = input_string_reversed.to_i
