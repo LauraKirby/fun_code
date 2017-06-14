@@ -5,14 +5,15 @@
 # @return {Boolean}
 
 def is_palindrome(x)
-  str = x.to_s.reverse
-  return false if str.length <= 1
-
-  int = str.to_i
+  return false if x > 2147483647 || x < -2147483648
   result = false
-  if str[-1] == "-"
-    int = -int
-  end
+  str = x.to_s.reverse
+  int = str.to_i
+
+  return true if str.length <= 1
+  return false if str[-1] == "-"
+
   result = true if x == int
+
   return result
 end

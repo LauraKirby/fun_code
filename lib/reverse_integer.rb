@@ -14,8 +14,7 @@ def reverse_integer(x)
     input_string = x.to_s
     return x if input_string.length == 1
 
-    input_string_reversed = input_string.reverse
-    input_integer_reversed = input_string_reversed.to_i
+    input_integer_reversed = input_string.reverse.to_i
 
     return 0 if input_integer_reversed > 2147483647 || input_integer_reversed < -2147483648
 
