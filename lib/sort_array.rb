@@ -15,7 +15,20 @@
 
 # time complexity is the same of size complexity, O(n + k)
 
-input_arr = [1, 4, 1, 2, 7, 5, 2]
+class Container
+  attr_accessor :int_value, :name
+
+  def initialize(int_value, name)
+    @int_value = int_value
+    @name = name
+  end
+end
+
+input_arr = []
+
+5.times do
+  input_arr.push(Container.new(rand(0..1023), "abcd"))
+end
 
 def sort_array(input_arr)
   max = 1023
@@ -23,27 +36,26 @@ def sort_array(input_arr)
   result = Array.new(input_arr.size)
 
   return false if input_arr.length == 0
-  return input_arr if input_arr.length == 1 && input_arr[0] >= 0
+  return input_arr if input_arr.length == 1 && input_arr[0].int_value >= 0 && input_arr[0].int_value <= max
 
-  #count the occurance of each value
+  # count the number of times each value appears.
   input_arr.each do |val|
-    return false if val > 1023 || val < 0
-    nums_count_arr[val] += 1
+    return false if val.int_value > 1023 || val.int_value < 0
+    nums_count_arr[val.int_value] += 1
   end
 
-  # calculate the position of each object for the result array by
-  # store the sum of the previous counts in each element of the nums_count_arr
+  # calculate the position of each object for the result array.
+  # store the sum of the previous counts in each element of the nums_count_arr.
   nums_count_arr.length.times do |i|
     nums_count_arr[i] = nums_count_arr[i] + nums_count_arr[i - 1]
   end
 
   # propagate result array with sorted values.
   input_arr.length.times do |i|
-    nums_count_arr[input_arr[i]] -= 1
-    result[nums_count_arr[input_arr[i]]] = input_arr[i]
+    nums_count_arr[input_arr[i].int_value] -= 1
+    result[nums_count_arr[input_arr[i].int_value]] = input_arr[i]
   end
 
-  puts result
   return result
 end
 
