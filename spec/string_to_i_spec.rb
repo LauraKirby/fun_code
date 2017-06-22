@@ -13,9 +13,9 @@ describe "#string_to_i" do
     expect(my_atoi("1")).to eq 1
   end
 
-  # String with one int value followed by a char:
-  # "1a"
-  # => 1
+  it "recieves a string with '1a' and removes the 'char' and returns the integer value 1" do
+    expect(my_atoi("1a")).to eq 1
+  end
 
   # String that begins with a char and ends with an int
   # "a1"
