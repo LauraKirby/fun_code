@@ -29,9 +29,9 @@ describe "#string_to_i" do
     expect(my_atoi("a 1")).to eq 1
   end
 
-  # String that has 2 integers in a row
-  # "12"
-  # => 12
+  it "recieves a string that has two numbers in a row. it returns a concatenated integer for the numbers" do
+    expect(my_atoi("12")).to eq 12
+  end
 
   # String that has 2 integers with chars on either side
   # "a1b2c"
