@@ -5,9 +5,9 @@ describe "#string_to_i" do
     expect(my_atoi(12)).to eq 12
   end
 
-  # String
-  # space character: " "
-  # => 0
+  it "recieves a space character and returns 0" do
+    expect(my_atoi(" ")).to eq 0
+  end
 
   # String with one int value:
   # "1"
