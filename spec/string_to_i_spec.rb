@@ -9,9 +9,9 @@ describe "#string_to_i" do
     expect(my_atoi(" ")).to eq 0
   end
 
-  # String with one int value:
-  # "1"
-  # => 1
+  it "recieves a string with '1' and returns the integer value 1" do
+    expect(my_atoi("1")).to eq 1
+  end
 
   # String with one int value followed by a char:
   # "1a"
@@ -36,4 +36,6 @@ describe "#string_to_i" do
   # String that has 2 integers with chars on either side
   # "a1b2c"
   # "12"
+
+  # to do, write tests for edge cases
 end

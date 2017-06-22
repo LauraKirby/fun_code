@@ -16,6 +16,7 @@ require 'pry'
   # is greater or less than bounds (eg string > 2147483647 || string < -2147483648)
 
 # Two approaches
+  # Implementing this version:
   # 1. use an array
   # turn string into array
   # iterate over each array item
@@ -24,7 +25,8 @@ require 'pry'
       # join string number onto result
   # return
 
-  # Testing this approach
+  # Doesn't make sense to create hash,
+  # since we can conquer coverting on initial iteration of string
   # 2. use a hash
   # the key is the index and the value is that ASCII value
     # if the hash value is between 48 - 57
@@ -44,12 +46,10 @@ def my_atoi(str=nil)
   elsif str.class == String
     str_arr = str.split("")
 
-    my_hash = {}
-
     str_arr.each_with_index do  |v, i|
-      my_hash["#{i}"] = "#{v.ord}"
-      if v.ord < 32 || v.ord > 47
-        # add if it is not within this range
+      ascii_value = v.ord
+      if ascii_value > 48 || ascii_value < 57
+        # add if it is within this range
         result.push(v)
       end
     end
@@ -57,6 +57,7 @@ def my_atoi(str=nil)
   end
 
   return 0 if result.length == 0
+  return result.join.to_i
 end
 
 
