@@ -9,17 +9,21 @@ describe "#string_to_i" do
     expect(my_atoi(" ")).to eq 0
   end
 
-  it "recieves a string with '1' and returns the integer value 1" do
+  it "recieves a string with a number. it returns the integer value" do
     expect(my_atoi("1")).to eq 1
   end
 
-  it "recieves a string with '1a' and removes the 'char' and returns the integer value 1" do
+  it "recieves a string with a number and a char. it returns an integer for the number" do
     expect(my_atoi("1a")).to eq 1
   end
 
-  # String that begins with a char and ends with an int
-  # "a1"
-  # => 1
+  it "recieves a string that begins with a char and ends with a number. it returns an integer for the number" do
+    expect(my_atoi("1a")).to eq 1
+  end
+
+  it "recieves a string that begins with a number and ends with a char. it returns an integer for the number" do
+    expect(my_atoi("a1")).to eq 1
+  end
 
   # String that has a char and a space before the int
   # "a 1"

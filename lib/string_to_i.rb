@@ -48,7 +48,7 @@ def my_atoi(str=nil)
 
     str_arr.each_with_index do  |v, i|
       ascii_value = v.ord
-      if ascii_value > 48 || ascii_value < 57
+      if ascii_value >= 48 && ascii_value <= 57
         # add if it is within this range
         result.push(v)
       end
