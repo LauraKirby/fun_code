@@ -25,13 +25,9 @@ describe "#string_to_i" do
     expect(my_atoi("a1")).to eq 1
   end
 
-  # String that has a char and a space before the int
-  # "a 1"
-  # => 1
-
-  # String that has a symbol before the int
-  # "%1"
-  # => 1
+  it "recieves a string that begins with a char, followed by a symbol and ends with a integer. it returns an integer for the number" do
+    expect(my_atoi("a 1")).to eq 1
+  end
 
   # String that has 2 integers in a row
   # "12"
