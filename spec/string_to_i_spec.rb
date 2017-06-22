@@ -33,9 +33,9 @@ describe "#string_to_i" do
     expect(my_atoi("12")).to eq 12
   end
 
-  # String that has 2 integers with chars on either side
-  # "a1b2c"
-  # "12"
+  it "recieves a string that has two numbers with a char on either side. it returns a concatenated integer for the numbers" do
+    expect(my_atoi("a1b2c")).to eq 12
+  end
 
   # to do, write tests for edge cases
 end
