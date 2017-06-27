@@ -28,19 +28,7 @@ def find_median_sorted_arrays(nums1=[], nums2=[])
   median = 0
   total_length = nums1.length + nums2.length
   arr_index = total_length - 1
-  combined_arr = []
-
-  # combine arrays
-  until (nums1.empty? || nums2.empty?) do
-    if nums1.first <= nums2.first
-      combined_arr.push(nums1.shift)
-    else
-      combined_arr.push(nums2.shift)
-    end
-  end
-
-  # concat any remaining values
-  combined_arr.concat(nums1).concat(nums2)
+  combined_arr = merge(nums1, nums2)
 
   if total_length%2 == 0
     median_index_1 = arr_index/2
@@ -51,13 +39,19 @@ def find_median_sorted_arrays(nums1=[], nums2=[])
     median = combined_arr[median_index_1].to_f
   end
 
-
   return median
 
 end
 
-# puts "median: #{median}"
-# 1,3,5,6,7,9
-# numsA = [3,6,9]
-# numsB = [1,5,7]
-# find_median_sorted_arrays(numsA, numsB)
+def merge(arr_1, arr_2)
+  merged_arr = []
+  until (arr_1.empty? || arr_2.empty?) do
+    if arr_1.first <= arr_2.first
+      merged_arr.push(arr_1.shift)
+    else
+      merged_arr.push(arr_2.shift)
+    end
+  end
+
+  merged_arr.concat(arr_1).concat(arr_2)
+end
