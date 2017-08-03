@@ -1,4 +1,4 @@
-def isUnique(str)
+def is_unique(str)
   hash_map = {}
   result = true
   str.each_char do |c|
@@ -42,3 +42,5 @@ puts "\n\n"
 
 # optimization:
 # return false as soon as we set a key's value to "2"
+
+# runtime O(N)

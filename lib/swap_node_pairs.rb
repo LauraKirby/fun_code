@@ -40,7 +40,7 @@ node_4 = ListNode.new(55)
 node_3.next = node_4
 
 
-binding.pry
+# binding.pry
 def swap_pairs(head)
 
 end

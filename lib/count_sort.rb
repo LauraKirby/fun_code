@@ -5,7 +5,7 @@
 # memory and in O(n) time complexity
 
 # 10 bit integer ==> 0-1023
-# object.integer
+# object.integer_value
 # input   [obj_val_7, obj_val_4, obj_val_2, obj_val_1]
 # output  [obj_val_1, obj_val_2, obj_val_4, obj_val_7]
 
@@ -55,8 +55,12 @@ def sort_array(input_arr)
     nums_count_arr[input_arr[i].int_value] -= 1
     result[nums_count_arr[input_arr[i].int_value]] = input_arr[i]
   end
-
+  print "sorted list:"
+  result.each do |obj|
+    print " #{obj.int_value} \n"
+  end
   return result
 end
 
 sort_array(input_arr)
+

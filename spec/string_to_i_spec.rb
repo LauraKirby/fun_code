@@ -5,7 +5,7 @@ describe "#string_to_i" do
     expect(my_atoi(12)).to eq 12
   end
 
-  it "recieves a space character and returns 0" do
+  it "recieves a space character. it returns 0" do
     expect(my_atoi(" ")).to eq 0
   end
 
@@ -30,12 +30,38 @@ describe "#string_to_i" do
   end
 
   it "recieves a string that has two numbers in a row. it returns a concatenated integer for the numbers" do
-    expect(my_atoi("12")).to eq 12
+    expect(my_atoi("1232341345")).to eq 1232341345
   end
 
   it "recieves a string that has two numbers with a char on either side. it returns a concatenated integer for the numbers" do
-    expect(my_atoi("a1b2c")).to eq 12
+    expect(my_atoi("a-1b2c")).to eq 12
   end
 
-  # to do, write tests for edge cases
+  it "recieves a string that has a length of 0. it returns 0." do
+    expect(my_atoi("")).to eq 0
+  end
+
+  it "recieves a nil value. it returns 0" do
+    expect(my_atoi(nil)).to eq 0
+  end
+
+  it "recieves a number that is beyond the upper bound. it returns 0" do
+    expect(my_atoi(2147483648)).to eq 0
+  end
+
+  it "recieves a String with a number that is beyond the upper bound. it returns 0" do
+    expect(my_atoi("aaaa21bbbbb4748cccc3648ffffff")).to eq 0
+  end
+
+  it "recieves a string that starts with '-'. it returns a negative number." do
+    expect(my_atoi("-a1b2c")).to eq(-12)
+  end
+
+  it "recieves a number that is beyond the lower bound. it returns 0" do
+    expect(my_atoi(-2147483649)).to eq 0
+  end
+
+  it "recieves a number that is beyond the lower bound. it returns 0" do
+    expect(my_atoi("-asdf2147daf483dasdfrag649")).to eq 0
+  end
 end

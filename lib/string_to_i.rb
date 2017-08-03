@@ -1,4 +1,3 @@
-require 'pry'
 # Implement atoi to convert a string to an integer.
 
 # Hint: Carefully consider all possible input cases.
@@ -10,10 +9,11 @@ require 'pry'
 
 # Brainstorm:
 # Edge cases:
-  # if the argument:
-  # is type Integer, return that Integer
-  # length is less than 1 or nil, return 0
-  # is greater or less than bounds (eg string > 2147483647 || string < -2147483648)
+  # if the argument or the result:
+    # length is less than 1
+    # is nil
+    # is a type other than Integer or String is passed into the method
+    # is greater or less than bounds (eg string > 2147483647 || string < -2147483648)
 
 # Two approaches
   # Implementing this version:
@@ -39,8 +39,10 @@ require 'pry'
 
 def my_atoi(str=nil)
   result = []
+  return 0 if str == nil || str == ""
 
   if str.class == Integer
+    return 0 if str > 2147483647 || str < -2147483648
     return str
 
   elsif str.class == String
@@ -49,16 +51,21 @@ def my_atoi(str=nil)
     str_arr.each_with_index do  |v, i|
       ascii_value = v.ord
       if ascii_value >= 48 && ascii_value <= 57
-        # add if it is within this range
         result.push(v)
       end
     end
 
+    return 0 if result.length == 0
+
+  else
+    return 0
   end
 
-  return 0 if result.length == 0
-  return result.join.to_i
+  result = result.join.to_i
+  result = -result if str[0] == "-"
+
+  return 0 if result > 2147483647 || result < -2147483648
+
+  return result
 end
-
-
 
