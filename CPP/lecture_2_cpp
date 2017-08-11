@@ -1,0 +1,39 @@
+int main always returns an integer.
+return 0 means success.
+not really used too much
+
+integer division does automatic truncation. you must create a double if you want to work with the decmial result
+
+1. Enumeration
+
+define type
+
+enum directionT {North, South, East, West}
+now you can use "directionT" as a type, like you would with "int"
+
+2. Records
+- structure type, here is what is in
+- declare a new type
+
+struct pointT {
+  double x;
+  double y;
+};
+
+can copy all of the items from a struct onto an object (i think)
+
+3. parameter passing
+- pass by value. it makes a copy. new space, new storage.
+- pass by reference, use the "&" and the parameter that was used will be modified
+
+c++
+== will compare where or not the ascii letters are the same or not. it will not look at the address, like java would.
+
++= to concat, can only do it with characters and strings. do add in an integer, you woould have to do something else.
+
+member function in c++, aka method in java
+
+there is no rule for what will happen if you try to access an element of a string that is out of bounds. it could crash, it could return 0...
+
+w/o a value, creating a string will initilize as an empty string
+
