@@ -36,4 +36,3 @@ member function in c++, aka method in java
 there is no rule for what will happen if you try to access an element of a string that is out of bounds. it could crash, it could return 0...
 
 w/o a value, creating a string will initilize as an empty string
-
