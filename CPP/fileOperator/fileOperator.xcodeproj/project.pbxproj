@@ -62,7 +62,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4F038FA81F4E8E4C00B6D356 /* random_text */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = random_text; sourceTree = "<group>"; };
+		4F038FA81F4E8E4C00B6D356 /* random_text.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = random_text.txt; sourceTree = "<group>"; };
 		4F199FB81F4E6129004AF464 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		4F4C830B1F4CBB1100B6C10D /* fileOperator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fileOperator; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F4C830E1F4CBB1100B6C10D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -181,7 +181,7 @@
 				4F4C83151F4CBCAD00B6C10D /* lib */,
 				4F4C830D1F4CBB1100B6C10D /* fileOperator */,
 				4F4C830C1F4CBB1100B6C10D /* Products */,
-				4F038FA81F4E8E4C00B6D356 /* random_text */,
+				4F038FA81F4E8E4C00B6D356 /* random_text.txt */,
 			);
 			sourceTree = "<group>";
 		};
