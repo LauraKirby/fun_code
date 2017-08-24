@@ -5,17 +5,10 @@
 //  Created by Laura Kirby on 8/22/17.
 //  Copyright © 2017 LK. All rights reserved.
 //
-//  The source code below is an updated version material presented in
-//  Stanford CS106B Programming Abstractions Course (2008), Lecture 6
-//  by Julie Zelenski
-//  C++ version: Apple LLVM version 8.1.0 (clang-802.0.42)
-//  Sources:
-//    Youtube:
-//      - https://www.youtube.com/watch?v=eYTDzvlAZMM&index=6&list=PLFE6E58F856038C69
-//    Stanford public course:
-//      - https://see.stanford.edu/Course/CS106B
-//      - https://see.stanford.edu/materials/icspacs106b/Lecture06.pdf
-//      - https://see.stanford.edu/materials/icspacs106b/Lecture6code.txt
+//  Lecture 6 materials:
+//    - https://www.youtube.com/watch?v=eYTDzvlAZMM&index=6&list=PLFE6E58F856038C69
+//    - https://see.stanford.edu/materials/icspacs106b/Lecture06.pdf
+//    - https://see.stanford.edu/materials/icspacs106b/Lecture6code.txt
 
 #include <fstream>
 #include <iostream>
