@@ -10,14 +10,19 @@
 
 # Card
   # instance variables
-    # suit: has one Suit
+    # suit: a Card has one Suit
   # instance methods
     # to_s
-    # is_facecard?
 
 # Deck
   # has 52 Cards
-  # type (show different versions eg: standard French, for children)
+  # instance method
+    # type (show different versions eg: standard French, for children)
+
+# Currently, Card has the attribute "type". Since this restates information
+# provided by Deck, I believe that Card should inherit from Deck. However,
+# this would mean that a Card could not be created without a Deck. This
+# is how playing cards are usually purchased, so I guess this is ok.
 
 STANDARD_PIPS = [ :club, :diamond, :heart, :spade ]
 STANDARD_RANKS  = [ :two, :three, :four, :five, :six, :seven, :eight,
@@ -32,36 +37,20 @@ class Suit
   end
 
   def to_s
-    puts "Suit: #{self.pip} of #{self.rank}"
+    "#{self.pip} of #{self.rank}"
   end
 end
 
 class Card
   attr_accessor :suit, :type
-  attr_writer :pip, :rank
 
   def initialize(type, pip, rank)
     @suit = Suit.new(pip, rank)
     @type = type
   end
 
-  def self.suits_for_type(card_type)
-    # result = []
-    # ObjectSpace.each_object(self) do |crd_obj|
-    #   if crd_obj.type == card_type
-    #     result.push(crd_obj.suit.to_s)
-    #   end
-    # end
-    # result
-    # should probably create a hash here -- if not, will run into issues after more
-    # than one deck is created
-    result = []
-    ObjectSpace.each_object(self) { |obj| result.push(obj.suit.to_s) if obj.type == card_type }
-    puts result
-  end
-
   def to_s
-    puts "Card: #{self.type}, Suit: #{self.suit.pip} of #{self.suit.rank}"
+    "#{self.type}, #{self.suit.pip} of #{self.suit.rank}"
   end
 end
 
@@ -90,11 +79,6 @@ class Deck
   def standard
     STANDARD_RANKS.flat_map {|rank| STANDARD_PIPS.map {|pip| Card.new(:standard, rank, pip)}}
   end
-
-  def to_s
-    puts @type
-    print "Deck: Type: #{@type}, Card count: #{@cards.length}, Suits: #{Card.suits_for_type(@type)}"
-  end
 end
 
 # Create a Suit
@@ -105,5 +89,5 @@ end
 
 # Create a "standard" Deck of Cards
 deck = Deck.new(:standard)
-puts deck.cards[0].suit
-# deck.to_s
+puts deck.cards_for_suit(:club)
+puts "first card in deck: #{deck.cards[0].to_s}"
