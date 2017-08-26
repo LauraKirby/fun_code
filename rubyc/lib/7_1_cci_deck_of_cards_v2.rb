@@ -22,8 +22,6 @@
 STANDARD_PIPS = [ :club, :diamond, :heart, :spade ]
 STANDARD_RANKS  = [ :two, :three, :four, :five, :six, :seven, :eight,
                     :nine, :ten, :jack, :queen, :king, :ace ]
-KID_PIPS = [ :apple, :ball, :cat ]
-KID_RANKS  = [ :A, :B, :C]
 
 class Suit
   attr_accessor :pip, :rank
@@ -69,7 +67,7 @@ end
 
 class Deck
   attr_accessor :cards, :type, :dealt_index
-  @@types = [:standard, :kid]
+  @@types = [:standard]
 
   def initialize(create_type)
     if @@types.include? create_type
@@ -93,10 +91,6 @@ class Deck
     STANDARD_RANKS.flat_map {|rank| STANDARD_PIPS.map {|pip| Card.new(:standard, rank, pip)}}
   end
 
-  def kid
-    KID_RANKS.each_with_index {|rank, i| Card.new(:kid, rank, KID_PIPS[i])}
-  end
-
   def to_s
     puts @type
     print "Deck: Type: #{@type}, Card count: #{@cards.length}, Suits: #{Card.suits_for_type(@type)}"
@@ -109,13 +103,6 @@ end
 # Create a Card
 # card = Card.new(:standard, STANDARD_PIPS[0], STANDARD_RANKS[0])
 
-# Create a "kid" Deck of Cards
-deck_k = Deck.new(:kid)
-# deck_k.to_s
-
-# Card.suits_for_type(:kid)
-# puts deck_k.cards[0].suit
-# puts deck_k.cards_for_suit(:apple)
 # Create a "standard" Deck of Cards
 deck = Deck.new(:standard)
 puts deck.cards[0].suit
