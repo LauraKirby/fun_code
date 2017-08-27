@@ -16,13 +16,18 @@
 
 # Deck
   # has 52 Cards
-  # instance method
+  # instance methods
     # type (show different versions eg: standard French, for children)
+    # cards_for_suit
 
 # Currently, Card has the attribute "type". Since this restates information
 # provided by Deck, I believe that Card should inherit from Deck. However,
 # this would mean that a Card could not be created without a Deck. This
 # is how playing cards are usually purchased, so I guess this is ok.
+
+# Ideas:
+  # make Deck a linked list, is there a good use case for a binary search tree.
+  # create a Stack class, then make Deck from Stack
 
 STANDARD_PIPS = [ :club, :diamond, :heart, :spade ]
 STANDARD_RANKS  = [ :two, :three, :four, :five, :six, :seven, :eight,

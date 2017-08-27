@@ -16,15 +16,15 @@ def is_unique(str)
 end
 
 puts "hi - should be true"
-isUnique("hi")
+is_unique("hi")
 puts "\n\n"
 
 puts "hello - should be false"
-isUnique("hello")
+is_unique("hello")
 puts "\n\n"
 
 puts "helol - should be false"
-isUnique("helol")
+is_unique("helol")
 puts "\n\n"
 
 # test cases:

@@ -136,13 +136,11 @@ class Deck
     n = self.cards.length - 1
     while n > 0
       i = rand(n -= 1 )
-      position_one = self.cards[i]
-      position_two = self.cards[n]
-      self.cards[i] = position_two
-      self.cards[n] = position_one
+      temp = self.cards[i]
+      self.cards[i] = self.cards[n]
+      self.cards[n] = temp
       # can be written more elegantly like:
       # self.cards[i], self.cards[n] = self.cards[n], self.cards[i]
-
     end
     self.cards.each do |c|
       puts c.face
