@@ -108,6 +108,7 @@ struct personT {
 Set<string> MakeGuestList(personT one, personT two)
 {
     // make deep copy of 'one.friends' and store in 'result'
+    // a Set cannot contain duplicates
     Set<string> result = one.friends; // one's friends
     // destructively modify 'result'
     result += two.friends;             // add all of two's friends, '+='
