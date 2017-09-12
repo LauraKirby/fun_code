@@ -36,7 +36,7 @@ class Stack
   end
 end
 
-stack = Stack.new
-stack.push("hello")
-puts stack.inspect
+# stack = Stack.new
+# stack.push("hello")
+# puts stack.inspect
 

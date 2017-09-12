@@ -51,12 +51,12 @@ end
 # send argument to block
 def get_name
   print "what is your name?"
-  n = gets.chomp
+  user_name = gets.chomp
   # pass in name argument
-  yield n
+  yield user_name
   # return name so that when storing the result
   # of this method call, the name will be stored
-  n
+  user_name
 end
 
 # my_name = get_name do |n|
@@ -68,20 +68,20 @@ end
 # CALLING BLOCKS
 def get_name(prompt, &block)
   print prompt + ": "
-  n = gets.chomp
+  user_name = gets.chomp
   # can use the variable name (method arguments)
   # you could still use 'yield'
-  block.call(n)
-  name
+  block.call(user_name)
+  user_name
 end
 
 # block method: block_given?
 # only execute the block if one was given
 def get_name(prompt, &block)
   print prompt + ": "
-  n = gets.chomp
-  block.call(n) if block_given?
-  name
+  user_name = gets.chomp
+  block.call(user_name) if block_given?
+  user_name
 end
 
 # block methods

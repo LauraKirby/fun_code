@@ -71,3 +71,7 @@ xcuserdata/
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+
+# Notes
+# random notes that don't need to be saved/shared on github
+./notes

@@ -6,13 +6,13 @@ def is_unique(str)
       result = false
       hash_map[c] += 1
       result = false
-      puts "result: #{result}"
+      puts "result one: #{result}"
       return
     else
       hash_map[c] = 1
     end
   end
-  puts "result: #{result}"
+  puts "result end: #{result}"
 end
 
 puts "hi - should be true"
@@ -40,7 +40,32 @@ puts "\n\n"
 # an optimization might be to check if string length is 1,
 # then return true
 
-# optimization:
-# return false as soon as we set a key's value to "2"
+# time complexity: O(N)
+  # where n is the length of the string
+# space complexity: o(1)
+  # will never need a hash larger than 128 characters, because
+  # this is the number of available characters
 
-# runtime O(N)
+
+# reduce space by using a bit vector, i don't know this concept.
+# should come back to this
+
+def is_unique_arr(arr)
+  hash_map = {}
+  result = true
+  arr.each do |c|
+    if hash_map[c] && hash_map[c] > 0
+      result = false
+      hash_map[c] += 1
+      result = false
+      puts "result one: #{result}"
+      return
+    else
+      hash_map[c] = 1
+    end
+  end
+  puts "result end: #{result}"
+end
+
+arr = [1,3,4,5,6]
+is_unique_arr(arr)
