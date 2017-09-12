@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript and the DOM</title>
+    <link rel="stylesheet" href="./public/css/style.css">
+  </head>
+
+  <body>
+    <h1 id="page-heading" title="appears as tool tip when hover">JavaScript and the DOM</h1>
+    <p>Change items on the document.</p>
+    <fieldset>
+      <p>
+        <input class="heading-input" type="text">
+        <button class="heading-btn">Change document title</button>
+      </p>
+
+      <p>
+        <input class="description-input" type="text">
+        <button class="description-btn">Change list description</button>
+      </p>
+
+      <p class="description">Programming languages that I enjoy practicing.</p>
+      <button class="hide-btn">Hide list</button>
+      <ul class="language-list">
+        <li>Ruby</li>
+        <li>Javascript</li>
+        <li>C++</li>
+        <li>Java</li>
+      </ul>
+
+      <p>
+        <button class="add-list-item-btn">Add</button>
+        <input class="list-item-input" type="text" placeholder="item">
+      </p>
+
+    </fieldset>
+
+    <script src="./public/js/app.js"></script>
+
+  </body>
+</html>
