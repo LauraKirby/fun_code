@@ -1,4 +1,4 @@
-// lowdash & _ - are fuctional libraries
+// lowdash & _ - are functional libraries
 // closure
 class Person {
   constructor(age, name) {
@@ -26,13 +26,23 @@ function callback(){
 }
 
 
+// Javascript implementation
 
-// visualizer
-// dashboard - finance team
-// admin/ pronto - items to connect database when using birst as product
-// aquired by infor, 3-4 months ago
+function Person2(age, name){
+  this.age = age;
+  this.name = name;
+  this.myCallback = callback.bind(this);
+  this.set = function(property, value){
+    this[property] = value;
+  };
+  this.printProperty = printNewProperty2.bind(this, "age");
 
-// senior software engineer
-// 2 weeks ago, flown to NY to meet with headquarters
-// has been there for 10 months
-// about 50 people on the floor, 1/2 engineering is in India, QA is there.
+
+}
+
+function printNewProperty2(property){
+  console.log(this[property]);
+}
+
+var p2 = new Person2(100, "Michelle")
+p2.printProperty()
