@@ -53,49 +53,34 @@
 
 # make_into_rows(images, 220, 40)
 
-require 'mathn'
-
 def make_into_rows(images, page_width, row_height)
   result = []
   temp_images = []
 
   images.each do |image|
-    puts "image width: #{image[:width]}"
-    puts "image height: #{image[:height]}"
-
     if image[:height] != row_height
-      update_image_dimensions(image, page_width, row_height)
+      # update the image height and width based upon the
+      # ratio of row_height to image height
+      update_image_dimensions(row_height, image)
     end
 
-    puts "final image width: #{image[:width]}"
-    puts "final image height: #{image[:height]}"
-    puts "src: #{image[:src]}"
-
-    # image with is the same as page width, push image as separate array into result
+    # create a temporary array which will be emptied out each time the sum
+    # of the images' width is equal to or greater than the "page_width"
     temp_images.push(image)
+    total_width = calculate_width(temp_images)
 
-    if calculate_width(temp_images) == page_width
-        result.push(temp_images)
-        temp_images = []
-        temp_images.push(image)
-    elsif calculate_width(temp_images) > page_width
-        result.push(temp_images[0..temp_images.length - 2])
-        temp_images = []
-        temp_images.push(image)
+    if total_width == page_width
+      result.push(temp_images)
+      temp_images = []
+      temp_images.push(image)
+    elsif total_width > page_width
+      result.push(temp_images[0..temp_images.length - 2])
+      temp_images = []
+      temp_images.push(image)
     end
-
-    puts "\n\n\n"
-
   end
 
-
-  puts "result: "
-
-  result.each_with_index do |r, i|
-    print "\n"
-    print "#{i}: #{r}"
-    print "\n"
-  end
+  print result
   result
 end
 
@@ -107,11 +92,10 @@ def calculate_width(images)
   sum
 end
 
-def update_image_dimensions(image, preferred_height)
+def update_image_dimensions(preferred_height, image)
   ratio = preferred_height.to_f / image[:height].to_f
   image[:width] = (image[:width] * ratio).truncate
   image[:height] = (image[:height] * ratio).truncate
-  puts "ratio #{ratio}"
 end
 
 images =   [
@@ -124,6 +108,3 @@ images =   [
             ]
 
 make_into_rows(images, 220, 40)
-images[0..images.length - 2]
-
-[0..images.length - 2]

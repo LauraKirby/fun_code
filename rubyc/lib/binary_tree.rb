@@ -1,162 +1,113 @@
-# breadth-first
+class Node
+  attr_accessor :left, :right, :val
 
-class Tree
-  attr_accessor :left, :right, :data, :parent
-
-  def initialize(x=nil, parent=nil)
-    @left = nil
-    @right = nil
-    @data = x
-    @parent = parent
+  def initialize(val, left = nil, right = nil)
+    @val = val
+    @left = left
+    @right = right
   end
 
-  def insert(x)
-    list = []
-
-
-    if @data == nil
-      @data = x
-    elsif @left == nil
-      @left = Tree.new(x, parent)
-    elsif @right == nil
-      @right = Tree.new(x, parent)
-    else
-      list.push(@left, @right)
-      loop do
-        node = list.shift
-        if node.left == nil
-          node.insert(x)
-          break
-        else
-          list.push(node.left)
-        end
-        if node.right == nil
-          node.insert(x)
-          break
-        else
-          list.push(node.right)
-        end
-      end
-    end
-  end
-
-  def traverse()
-    list = []
-    yield @data
-    list.push(@left) if @left != nil
-    list.push(@right) if @right != nil
-    loop do
-      break if list.empty?
-      node = list.shift
-      yield node.data
-      list.push(node.left) if node.left != nil
-      list.push(node.right) if node.right != nil
-    end
-  end
-
-  def search(data)
-    if self.data == data
-      puts "found: #{@data}"
-
-      return self
-    elsif data < self.data
-      puts "left.search(data): #{data}"
-      return self.left ? left.search(data) : nil
-    else
-      puts "right.search(data): #{data}"
-      return self.right ? right.search(data) : nil
-    end
-  end
-
-  def search_ancestors(data, ancestor_nodes=[])
-    puts "data: #{@data}"
-    ancestor_nodes.push(data)
-    if self.data == data
-      ancestor_nodes.push(@data)
-      puts "found @data: #{@data}"
-      puts "self.data: #{self.data}"
-      puts "data: #{data}"
-
-      return ancestor_nodes
-    elsif data < self.data
-      ancestor_nodes.push(@data)
-      puts "left @data: #{@data}"
-      puts "self.data: #{self.data}"
-      puts "data: #{data}"
-      # left.search_ancestors(@data, ancestor_nodes) if left
-      return left ? left.search_ancestors(@data, ancestor_nodes) : nil
-    else
-      ancestor_nodes.push(@data)
-      puts "right @data: #{@data}"
-      puts "self.data: #{self.data}"
-      puts "data: #{data}"
-      # right.search_ancestors(@data, ancestor_nodes) if right
-
-
-      return right ? right.search_ancestors(@data, ancestor_nodes) : nil
-    end
-    return ancestor_nodes
-  end
-
-  def depth_first_search(start=data, target)
-    if self.data == target
-      return target
-    elsif data == nil
-      puts "not found"
-      return false
-    end
-
-    if left
-      puts "left #{left.data}"
-      depth_first_search(left, target)
-
-    end
-
-  end
-
-  def dfs_rec(item, node=nil)
-
-    return nil if self.data.nil?
-    return data if data == item
-
-    left_node = dfs_rec(item, left)
-    right_node = dfs_rec(item, right)
-
-  end
-
-
-  def print_ancestors(node, target)
-    #  base cases
-    if data == nil
-        return false;
-    elsif data == target
-        return true;
-    end
-    # If target is present in either left or right subtree
-    # of this node, then print this node
-    if (print_ancestors(left, target)|| print_ancestors(right, target))
-        puts "new data #{data}"
-        return true;
-      else
-        return false;
-    end
-  end
 
 end
 
-items = [1,2,3,4,5,6,7]
-tree = Tree.new
-items.each {|x| tree.insert(x)}
+class BinaryTree
+  attr_accessor :insert, :print_tree
 
-tree.search(4)
+  def initialize(root_value)
+    @root = insert(root_value)
+  end
 
-# tree.traverse { |x| print "#{x} "}
-# tree_2 = tree.search_ancestors(7)
-# tree_2.traverse { |x| print "#{x} "}
-# puts "\n\n"
-# print tree.search_ancestors(7)
-# print tree.search_ancestors(4)
-tree.print_ancestors(1,4)
+  def insert(val)
+    node = create_node(val)
+    return if !node
 
-# tree.depth_first_search(1,4)
-tree.dfs_rec(4)
+    if !@root
+      @root = node
+      puts "root val: #{node.val}"
+    else
+      insert_node_helper(@root, node)
+    end
+  end
+
+  def print_tree
+    if @root == nil
+      puts "root is nil"
+      return
+    end
+
+    root = @root
+
+    print_pre_order(root)
+  end
+
+private
+  def create_node(val)
+    # do not create a new node if 'nil' is passed in
+    if val == nil
+      puts "node was not created"
+      return
+    end
+
+    puts "new node created"
+    return Node.new(val)
+  end
+
+  def insert_node_helper(root, new_node)
+    if !root.left
+      root.left = new_node
+      puts "added to left tree: #{new_node.val}"
+      return
+    elsif !root.right
+      root.right = new_node
+      puts "added to right tree: #{root.right.val}"
+      return
+    end
+
+    #move left
+    if root.left
+      insert_node_helper(root.left, new_node)
+
+    #move right
+    elsif root.right
+      insert_node_helper(root.right, new_node)
+
+    end
+  end
+
+
+  def print_pre_order(node, side="root")
+    # print root, then left, then right
+    return if (node == nil)
+    puts "print tree: #{node.val}, side: #{side}"
+    print_pre_order(node.left, "left")
+    print_pre_order(node.right, "right")
+  end
+end
+
+
+def main
+  # create binary tree
+  arr = [10,2,1,4,5,7,8,17,18]
+  binary_tree = BinaryTree.new(nil)
+
+
+  for i in 0..arr.length - 1 do
+    binary_tree.insert(arr[i])
+  end
+
+  binary_tree.print_tree
+end
+
+main
+
+# edge cases:
+# duplicates values passed in
+
+# test cases:
+
+# print error message if:
+# nil is passed to insert
+# nil was used in BinaryTree constructor
+# tree exceeds limit
+
+

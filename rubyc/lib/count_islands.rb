@@ -30,7 +30,9 @@ def count_islands(input)
       if column == 1
         # puts "column equals 1, increase count"
         count += 1
-        if has_neighbor?(input, i, j) == true
+        binding.pry
+        if has_neighbor?(input, i, j)
+          binding.pry
           # puts "column's neighbor equals 1, decrease count"
           count -= 1
         end
@@ -69,3 +71,12 @@ def has_neighbor?(input, x_coordinate, y_coordinate)
   return false
 end
 
+
+input = [
+          [1,1,1,1,0],
+          [1,1,0,1,0],
+          [1,1,0,0,0],
+          [0,0,0,0,0]
+        ]
+
+count_islands(input)

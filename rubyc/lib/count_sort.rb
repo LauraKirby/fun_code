@@ -62,5 +62,5 @@ def sort_array(input_arr)
   return result
 end
 
-sort_array(input_arr)
+# sort_array(input_arr)
 
