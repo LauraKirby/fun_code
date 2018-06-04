@@ -24,7 +24,7 @@ def merge_two_lists(l1, l2)
       i += 1
     end
 
-    print result
+    # print result
     result
 end
 

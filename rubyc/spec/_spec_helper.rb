@@ -13,4 +13,7 @@ require_relative '../lib/07_1_cci_deck_of_cards.rb'
 require_relative '../lib/parenthesis_matcher.rb'
 require_relative '../lib/count_islands.rb'
 require_relative '../lib/battleship.rb'
+require_relative '../lib/rotate_chars_13.rb'
+require_relative '../lib/skip_nth_item.rb'
+
 # require_relative '../lib/javascripts/test_javascript.js'

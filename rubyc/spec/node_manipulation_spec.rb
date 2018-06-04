@@ -21,7 +21,7 @@ describe "singlely linked node list" do
   end
 
   # describe "#reverse_nodes" do
-  #   it "recieves two empty arrays. returns zero" do
+  #   it "receives two empty arrays. returns zero" do
   #     expect(find_median_sorted_arrays([],[])).to eq 0
   #   end
   #   describe "list size of two" do

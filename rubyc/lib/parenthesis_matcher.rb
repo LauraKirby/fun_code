@@ -34,6 +34,7 @@ def paren_matcher(str)
       # will never be in the symbol string
       stack.empty? ? top = "-1" : top = stack.peek
       top = stack.peek
+      return false if top.nil?
       if lsym.index(top) != rsym.index(sym)
         return false
       else
@@ -42,7 +43,7 @@ def paren_matcher(str)
       # ignore non-grouped characters...
     end
   end
-  puts "finish and return: #{stack.empty?}"
+  # puts "finish and return: #{stack.empty?}"
 
   # Ensure stack is empty
   return stack.empty?

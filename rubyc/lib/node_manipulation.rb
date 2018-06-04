@@ -57,7 +57,7 @@ last_node = ListNode.new(0)
 
 def print_node_list(head, result="")
   result << "#{head.val}"
-  puts result if (head.next == nil)
+  # puts result if (head.next == nil)
   return result if (head.next == nil)
   result << ", "
   print_node_list(head.next, result)
@@ -70,7 +70,7 @@ end
 
 
 def reverse_list(current_head, previous=nil)
-  puts "current_head.val: #{current_head.val}" if current_head.next == nil
+  # puts "current_head.val: #{current_head.val}" if current_head.next == nil
   return current_head if current_head.next == nil
 
   higher_val_node = current_head.next

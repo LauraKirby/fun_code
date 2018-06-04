@@ -55,9 +55,9 @@ def sort_array(input_arr)
     nums_count_arr[input_arr[i].int_value] -= 1
     result[nums_count_arr[input_arr[i].int_value]] = input_arr[i]
   end
-  print "sorted list:"
+  # print "sorted list:"
   result.each do |obj|
-    print " #{obj.int_value} \n"
+    # print " #{obj.int_value} \n"
   end
   return result
 end

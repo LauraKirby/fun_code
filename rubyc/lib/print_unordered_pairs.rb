@@ -7,7 +7,7 @@
 def print_unordered_pairs(arr_1, arr_2)
   for i in 0..arr_1.length - 1 do
     for j in 0..arr_2.length - 1 do
-      puts "#{arr_1[i]}, #{arr_2[j]}"
+      # puts "#{arr_1[i]}, #{arr_2[j]}"
     end
   end
 end
