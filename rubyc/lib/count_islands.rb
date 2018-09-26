@@ -1,82 +1,76 @@
-# # method: count_islands(input)
-# # result = []
-# # counter = 0
-# # first loop, iterate over rows
-# #   2nd loop, iterate over columns
-# #     if column value is 1
-# #       increment counter
-# #         and has_neighbor? is true
-# #           decrement counter
-# #
-# # return counter
+# method: count_islands(input)
+# result = []
+# counter = 0
+# first loop, iterate over rows
+#   2nd loop, iterate over columns
+#     if column value is 1
+#       increment counter
+#         and has_neighbor? is true
+#           decrement counter
+#
+# return counter
 
-# # helper method: has_neighbor? (curent_position)
-# # return true if a 1 is located at north, south, east or west of current position
-
-# # Example:
-# # input = [
-# #           [0,0,1,0],
-# #           [0,0,1,0],
-# #           [0,1,0,0]
-# #         ]
-
-# # should return 2
+# helper method: has_neighbor? (curent_position)
+# return true if a 1 is located at north, south, east or west of current position
 
 
-# def count_islands(input)
-#   count = 0
-#   input.each_with_index do |row, i|
-#     row.each_with_index do |column, j|
-#       if column == 1
-#         # puts "column equals 1, increase count"
-#         count += 1
-#         binding.pry
-#         if has_neighbor?(input, i, j)
-#           binding.pry
-#           # puts "column's neighbor equals 1, decrease count"
-#           count -= 1
-#         end
-#       end
-#     end
-#   end
+def num_islands(grid)
+  count = 0
 
-#   count
-# end
+  grid.each_with_index.map do |row, row_idx|
+    row.each_with_index.map do |column_value, column_idx|
+      puts "\n\n"
+      puts "column_value: '#{column_value}'"
+      if column_value == '1'
+        # I am surprised that passing grid here is destructive of "grid" above
+        clear_connected_land(grid, row_idx, column_idx)
+        count += 1
+      end
+      puts "column_value: '#{column_value}'"
+      puts "\n\n"
+    end
+    puts "grid, each row: #{row}, row_idx: #{row_idx}"
+  end
+
+  puts "final grid #{grid}"
+  count
+end
+
+def clear_connected_land(grid, row_idx, column_idx)
+  row_index_out_of_bounds = row_idx > grid.length - 1 || row_idx < 0
+  column_index_out_of_bounds = column_idx > grid[0].length - 1 || column_idx < 0
+  current_location_holds_water = row_index_out_of_bounds || grid[row_idx][column_idx] == '0'
+
+  # break out of recursive call if any of the following are true
+  if row_index_out_of_bounds || column_index_out_of_bounds || current_location_holds_water
+    puts " --- pop call from stack: location grid[#{row_idx}][#{column_idx}]-----"
+    return
+  end
+
+  # convert all connected "land" to "water"
+
+  # set current location to "water"
+  puts "current location grid[#{row_idx}][#{column_idx}] "
+  grid[row_idx][column_idx] = '0'
+  # check down by incrementing "row"
+  puts "move down grid[#{row_idx + 1}][#{column_idx}]"
+  clear_connected_land(grid, row_idx + 1, column_idx)
+  # check up by decrementing "row"
+  puts "move up grid[#{row_idx - 1}][#{column_idx}]"
+  clear_connected_land(grid, row_idx - 1, column_idx)
+  # check right by incrementing "column"
+  puts "move right grid[#{row_idx}][#{column_idx + 1}]"
+  clear_connected_land(grid, row_idx, column_idx + 1)
+  # check left by decrementing "column"
+  puts "move left grid[#{row_idx}][#{column_idx - 1}]"
+  clear_connected_land(grid, row_idx, column_idx - 1)
+end
 
 
+input = [
+          ['1','0'],
+          ['1','0']
+        ]
 
-# def has_neighbor?(input, x_coordinate, y_coordinate)
-#   # make sure +1/ -1 to y_coordinate will be in bounds
-#   if (x_coordinate > 1) && (x_coordinate < input.length - 1)
-#     # check if the value located in north is equal to 1
-#     if input[x_coordinate - 1][y_coordinate] == 1
-#       return true
-#     # check if the value located in south is equal to 1
-#     elsif input[x_coordinate + 1][y_coordinate] == 1
-#       return true
-#     end
-#   end
-
-#   # west & east
-#   if y_coordinate > 1 && y_coordinate < input[0].length - 1
-#     # check if the value located in west is equal to 1
-#     if input[x_coordinate][y_coordinate - 1] == 1
-#       return true
-#     # check if the value located in east is equal to 1
-#     elsif input[x_coordinate][y_coordinate + 1] == 1
-#       return true
-#     end
-#   end
-
-#   return false
-# end
-
-
-# input = [
-#           [1,1,1,1,0],
-#           [1,1,0,1,0],
-#           [1,1,0,0,0],
-#           [0,0,0,0,0]
-#         ]
-
-# count_islands(input)
+total = num_islands(input)
+puts "total: #{total}"
