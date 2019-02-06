@@ -1,25 +1,10 @@
-# method: count_islands(input)
-# result = []
-# counter = 0
-# first loop, iterate over rows
-#   2nd loop, iterate over columns
-#     if column value is 1
-#       increment counter
-#         and has_neighbor? is true
-#           decrement counter
-#
-# return counter
-
-# helper method: has_neighbor? (curent_position)
-# return true if a 1 is located at north, south, east or west of current position
-
-
 def num_islands(grid)
   count = 0
+  puts "original grid: #{grid}"
 
   grid.each_with_index.map do |row, row_idx|
     row.each_with_index.map do |column_value, column_idx|
-      puts "\n\n"
+      puts "\n"
       puts "column_value: '#{column_value}'"
       if column_value == '1'
         # I am surprised that passing grid here is destructive of "grid" above
