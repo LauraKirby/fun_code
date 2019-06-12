@@ -1,5 +1,5 @@
-require 'byebug'
-#
+require 'rspec/autorun'
+
 # We are going to build a system to help track the contents of a trailer (think 18 wheeler) and calculate the weight of the trailer over time.
 # - Trailers can hold pallets.
 # - A pallet has a weight, and a unique pallet ID.
@@ -64,42 +64,41 @@ class Trailer
     return @weight_timeline[@weight_timeline.keys.last] if @weight_timeline.keys.last < timestamp
 
     # timestamp falls between two recorded timestamps
-    return weight_for_nearest_timestamp(timestamp) if !@weight_timeline[timestamp]
-
-    @weight_timeline[timestamp]
+    weight_for_nearest_timestamp(timestamp)
   end
 
-  def binary_search(timestamp)
-    timeline_keys = @weight_timeline.keys
+  private
 
-    first_index = 0
-    last_index = @weight_timeline.keys.length - 1
-    middle_index = first_index + last_index / 2
+    def binary_search(timestamp)
+      timeline_keys = @weight_timeline.keys
+      first_index = 0
+      last_index = @weight_timeline.keys.length - 1
 
-    while first_index < last_index
-      if timestamp > timeline_keys[middle_index] && timestamp < timeline_keys[middle_index + 1]
-        timeline_key = timeline_keys[middle_index]
-        return timeline_key
+      while first_index <= last_index
+        middle_index = first_index + ((last_index - first_index) / 2)
 
-      # look right
-      elsif timestamp > timeline_keys[middle_index]
-        # only look at second half of array
-        first_index = middle_index + 1
-        middle_index = first_index + last_index / 2
+        # provided timestamp falls between two recorded timestamps
+        if timestamp > timeline_keys[middle_index] && timestamp < timeline_keys[middle_index + 1]
+          timeline_key = timeline_keys[middle_index]
+          return timeline_key
 
-      # look left
-      elsif timestamp < timeline_keys[middle_index]
-        # only look at first half of array
-        last_index = middle_index
-        middle_index = first_index + last_index / 2
+        # look right
+        elsif timestamp > timeline_keys[middle_index]
+          # only look at second half of array
+          first_index = middle_index + 1
+
+        # look left
+        elsif timestamp < timeline_keys[middle_index]
+          # only look at first half of array
+          last_index = middle_index - 1
+        end
       end
     end
-  end
 
-  def weight_for_nearest_timestamp(timestamp)
-    timeline_key = binary_search(timestamp)
-    @weight_timeline[timeline_key]
-  end
+    def weight_for_nearest_timestamp(timestamp)
+      timeline_key = binary_search(timestamp)
+      @weight_timeline[timeline_key]
+    end
 end
 
 class Pallet
