@@ -1,3 +1,7 @@
+RSpec.configure do |config|
+  config.color = true
+end
+
 require_relative '../lib/calculate_sum'
 require_relative '../lib/is_palindrome'
 require_relative '../lib/reverse_integer'
@@ -15,5 +19,6 @@ require_relative '../lib/count_islands.rb'
 require_relative '../lib/battleship.rb'
 require_relative '../lib/rotate_chars_13.rb'
 require_relative '../lib/skip_nth_item.rb'
+require_relative '../lib/binary_search.rb'
 
 # require_relative '../lib/javascripts/test_javascript.js'
