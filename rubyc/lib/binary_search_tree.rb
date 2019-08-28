@@ -1,4 +1,6 @@
+# node-based binary tree data structure
 class BinarySearchTree
+  # a subclass that contains data
   class Node
     attr_reader :key, :left, :right
 

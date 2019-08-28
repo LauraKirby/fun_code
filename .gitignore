@@ -75,3 +75,5 @@ xcuserdata/
 # Notes
 # random notes that don't need to be saved/shared on github
 ./notes
+
+.byebug_history
