@@ -17,30 +17,41 @@ class Logger {
 
   shouldPrintMessage(currentTimestamp, message) {
     this.printMessage(currentTimestamp, message)
-    if (this.recentMessages[message]) {
-      const existingTimestamp = this.recentMessages[message]
-      const prepareToPrint = this.outsideOfRange(existingTimestamp, currentTimestamp)
+    const previousTimestamp = this.recentMessages[message]
+    let shouldPrint = true
 
+    if (previousTimestamp) {
+      shouldPrint = this.outsideOfRange(previousTimestamp, currentTimestamp)
+      if (!shouldPrint) { return shouldPrint }
 
-      if (!prepareToPrint) { return false }
-
+      // each time you print, 'recentMessages' needs to be updated
+      // consider extracting or combining these two functions 
       // this.printMessage(currentTimestamp, message)
+      this.updateRecentMessages(message, currentTimestamp)
     } else {
-      this.recentMessages[message] = currentTimestamp
+      this.updateRecentMessages(message, currentTimestamp)
       // this.printMessage(currentTimestamp, message)
     }
 
-    return true
+    return shouldPrint
   }
 
+  // these could be private
   outsideOfRange(previousTimestamp, currentTimestamp) {
-    const timeAgo = currentTimestamp - this.printInterval
-    console.log(`timeAgo: ${timeAgo}, previousTimestamp: ${previousTimestamp}, currentTimestamp: ${previousTimestamp}`)
-    return timeAgo >= previousTimestamp
+    console.log(
+      `(currentTimestamp - interval) >= previousTimestamp\n` +
+      `(${currentTimestamp} - ${this.printInterval}) >= ${previousTimestamp}`
+    )
+
+    return (currentTimestamp - this.printInterval) >= previousTimestamp
   }
 
   printMessage(timestamp, message) {
     console.log(`logging string "${message}" at timestamp ${timestamp}`)
+  }
+
+  updateRecentMessages(message, timestamp) {
+    this.recentMessages[message] = timestamp
   }
 }
 
@@ -53,36 +64,50 @@ const logger = new Logger(10);
 // --- when: unique message and unique timestamp
 // ------- logging string "foo" at timestamp 1
 const result1 = logger.shouldPrintMessage(1, 'foo');
+console.log('Test 1');
 console.log('expected result: true');
 console.log('actual result: ', result1, '\n\n')
 
 // --- when: unique message and unique timestamp
 // ------- logging string "bar" at timestamp 2
+console.log('Test 2');
 const result2 = logger.shouldPrintMessage(2, 'bar');
 console.log('expected result: true');
 console.log('actual result: ', result2, '\n\n')
 
+console.log('Test 3');
 // --- when: duplicative message and outside of the "no print" range
 // ------- logging string "foo" at timestamp 11
 const result6 = logger.shouldPrintMessage(11, 'foo');
 console.log('expected result: true');
 console.log('actual result: ', result6, '\n\n')
 
+console.log('Test 4');
+// --- when: duplicative message and inside of the "no print" range for second
+//           message that was printed
+// ------- logging string "foo" at timestamp 11
+const result7 = logger.shouldPrintMessage(12, 'foo');
+console.log('expected result: false');
+console.log('actual result: ', result7, '\n\n')
+
 // ----------------------------------------------
 // describe: a message should not be printed
 // ----------------------------------------------
 // --- when: duplicative message and within "no print" range
 // ------- logging string "foo" at timestamp 3
+console.log('Test 5');
 const result3 = logger.shouldPrintMessage(3, 'foo');
 console.log('expected result: false');
 console.log('actual result: ', result3, '\n\n')
 
 // --- when: duplicative message and at the middle of the "no print" range
 // ------- logging string "bar" at timestamp 8
+console.log('Test 6');
 const result4 = logger.shouldPrintMessage(8, 'bar');
 console.log('expected result: false');
 console.log('actual result: ', result4, '\n\n')
 
+console.log('Test 7');
 // --- when: duplicative message and at the top of the "no print" range
 // ------- logging string "foo" at timestamp 10
 const result5 = logger.shouldPrintMessage(10, 'foo');
