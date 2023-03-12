@@ -23,15 +23,9 @@ class Logger {
     if (previousTimestamp) {
       shouldPrint = this.outsideOfRange(previousTimestamp, currentTimestamp)
       if (!shouldPrint) { return shouldPrint }
-
-      // each time you print, 'recentMessages' needs to be updated
-      // consider extracting or combining these two functions 
-      // this.printMessage(currentTimestamp, message)
-      this.updateRecentMessages(message, currentTimestamp)
-    } else {
-      this.updateRecentMessages(message, currentTimestamp)
-      // this.printMessage(currentTimestamp, message)
     }
+    // this.printMessage(currentTimestamp, message)
+    this.updateRecentMessages(message, currentTimestamp)
 
     return shouldPrint
   }
