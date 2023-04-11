@@ -1,4 +1,4 @@
-const url = 'https://pokeapi.co/api/v2/typee';
+const url = 'https://pokeapi.co/api/v2/type';
 const axios = require('axios');
 
 interface PokemonType {
@@ -21,8 +21,59 @@ interface ApiResponse {
   headers?: any,
   config?: any,
   request?: any,
-  data: ResponseData,
+  data?: ResponseData,
   message: string,
+}
+
+interface GpokeError {
+  message: string
+}
+
+const gpoke = async (): Promise<PokemonType[] | string> => {
+  return axios.get(url).then((resp): PokemonType[] => {
+    return resp?.data?.results ?? []
+  }).catch((error): GpokeError => {
+    console.log('we messed up')
+    // catch error here
+    return {
+      message: 'Errors'
+    }
+  })
+}
+
+
+const gnspoke = async (): Promise<PokemonType[]> => {
+  const ptypes = await gpoke();
+
+  if (!(ptypes instanceof Array)) {
+    console.log('handling error')
+    return []
+  }
+  return sortPokemonTypes(ptypes)
+}
+
+
+
+const gPokemon = async (): Promise<ApiResponse> => {
+  try {
+    return await axios.get(url);
+  } catch (error) {
+    return {
+      message: error.message,
+      status: error.response.status,
+    }
+  }
+}
+
+const gnsPokemon = async (): Promise<PokemonType[] | string> => {
+  const response = await gPokemon();
+  const pTypes = response?.data?.results;
+
+  if (!pTypes || (pTypes instanceof Array && pTypes.length === 0)) {
+    return response?.message ?? 'An unknown error occurred'
+  }
+
+  return sortPokemonTypes(pTypes)
 }
 
 const getPokemon = async (): Promise<ApiResponse> => {
@@ -73,8 +124,8 @@ const sortPokemonTypes = (pokemonTypes: PokemonType[]): PokemonType[] => {
 // }
 
 void async function main() {
-  const firstAndThirdToLast = await getPokemon()
-  // console.log(firstAndThirdToLast)
+  const firstAndThirdToLast = await gnspoke()
+  console.log(firstAndThirdToLast)
 }()
 
 // 1. Get a list of the types of Pokemon
