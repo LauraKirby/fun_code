@@ -1,4 +1,4 @@
-const url = 'https://pokeapi.co/api/v2/type';
+const url = 'https://pokeapi.co/api/v2/typee';
 const axios = require('axios');
 
 interface PokemonType {
@@ -23,20 +23,11 @@ interface ApiResponse {
   request?: any,
   data: ResponseData,
   message: string,
-  error?: string,
 }
 
-interface ApiError {
-  message: string
-  status: number
-  data: ResponseData,
-}
-
-const getPokemon = async (): Promise<ApiResponse | ApiError> => {
+const getPokemon = async (): Promise<ApiResponse> => {
   try {
-    const response = await axios.get(url)
-    response.message = "success"
-    return response
+    return await axios.get(url)
   } catch (error) {
     return {
       message: error.message,
@@ -61,29 +52,29 @@ const sortPokemonTypes = (pokemonTypes: PokemonType[]): PokemonType[] => {
   return pokemonTypes.sort((a: any, b: any) => a.name.localeCompare(b.name))
 }
 
-const findFirstAndThirdToLastPokemonType = async (): Promise<PokemonTypeByLocation> => {
-  const pokemonTypes = await getPokemon()
-  const result = { third: '' }
-  if (pokemonTypes.length < 2) {
+// const findFirstAndThirdToLastPokemonType = async (): Promise<PokemonTypeByLocation> => {
+//   const pokemonTypes = await getPokemon()
+//   const result = { third: '' }
+//   if (pokemonTypes.length < 2) {
 
-  }
+//   }
 
-  if (pokemonTypes.length > 2) {
-    const pokeType = pokemonTypes[pokemonTypes.length - 3]
-    result['thirdToLast'] = pokeType?.url
-  }
+//   if (pokemonTypes.length > 2) {
+//     const pokeType = pokemonTypes[pokemonTypes.length - 3]
+//     result['thirdToLast'] = pokeType?.url
+//   }
 
-  if (pokemonTypes.length > 0) {
-    const pokeType = pokemonTypes[0]
-    result.third = pokeType?.url
-  }
+//   if (pokemonTypes.length > 0) {
+//     const pokeType = pokemonTypes[0]
+//     result.third = pokeType?.url
+//   }
 
-  return result
-}
+//   return result
+// }
 
 void async function main() {
-  const firstAndThirdToLast = await findFirstAndThirdToLastPokemonType()
-  console.log(firstAndThirdToLast)
+  const firstAndThirdToLast = await getPokemon()
+  // console.log(firstAndThirdToLast)
 }()
 
 // 1. Get a list of the types of Pokemon
