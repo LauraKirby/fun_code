@@ -30,20 +30,38 @@ interface GpokeError {
 }
 
 const gpoke = async (): Promise<PokemonType[] | string> => {
-  return axios.get(url).then((resp): PokemonType[] => {
-    return resp?.data?.results ?? []
+  return axios.get(url).then((resp): PokemonType[] | GpokeError => {
+    if (!resp?.data?.results) {
+      return {
+        message: 'No pokemon types found'
+      }
+    }
+    return resp?.data?.results
   }).catch((error): GpokeError => {
     console.log('we messed up')
     // catch error here
     return {
-      message: 'Errors'
+      message: 'Fetch error'
     }
   })
 }
 
+// same as gpoke but try/catch instead of then.catch
+const gpe = async (): Promise<PokemonType[] | GpokeError> => {
+  try {
+    const resp = await axios.get(url);
+    return resp?.data?.results ?? []
+  } catch (e) {
+    return {
+      message: 'Errors'
+    }
+
+  }
+
+}
 
 const gnspoke = async (): Promise<PokemonType[]> => {
-  const ptypes = await gpoke();
+  const ptypes = await gpe();
 
   if (!(ptypes instanceof Array)) {
     console.log('handling error')
