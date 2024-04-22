@@ -3,8 +3,6 @@
 // ---------------------------------------
 // wrap top-level async function in a self-invoking function
 void (async function main() {
-  // const thirdAndThirdToLast = await findThirdAndThirdToLastPokemonType()
-  // console.log(thirdAndThirdToLast)
   const resolvedMessage = await resolveAfter2Seconds();
   console.log(resolvedMessage);
 })();
