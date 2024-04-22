@@ -1,6 +1,5 @@
 # Returns the first node for which fn(node) is truthy
 def breadth_first_search(root_node)
-  #
   queue = root_node.pop
 
   while queue.length > 0

@@ -77,3 +77,10 @@ xcuserdata/
 ./notes
 
 .byebug_history
+
+
+*.DS_Store
+
+
+# Typescript 
+*built

@@ -1,0 +1,91 @@
+// step 1: validate input
+//  - upcase and letters
+//  - isValidRomanNumeral
+//  - isValidOperand
+
+// step 2: convert roman numeral to number
+
+// step 3: caculate equation
+
+// step 4: convert number to roman numeral 
+
+// step 5: return roman numeral
+
+
+class RomanNumeralCalculator {
+  romanNumeralsToInt = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000,
+  }
+
+  operands = ['-']
+
+  constructor(){}
+
+  calculate(input){
+    const equation = input.split(" ")
+    // TO-DO: validate each part of the input
+    const numberOne = this.convertoToNumber(equation[0])
+    const numberTwo = this.convertoToNumber(equation[2])
+    const operand = this.convertoToNumber(equation[1])
+
+    if(!this.isValidOperand){
+      console.log('the operand that you have inserted is invalid')
+      return 'ERROR'
+    }
+    
+    if(equation[1] === '-'){ 
+      return this.convertToRomanNumeral(numberOne - numberTwo)
+    }
+  }
+
+  convertoToNumber(romanNumeral){
+    const romanNumerals = romanNumeral.split("")
+    let total = 0;
+
+    for (let i = 0; i < romanNumerals.length; i++) {
+      let tempValue = this.romanNumeralsToInt[romanNumerals[i]];
+
+      if (i + 1 < romanNumerals.length && romanNumerals[i + 1] > tempValue) {
+        total -= tempValue;
+      } else {
+        total += tempValue;
+      }
+    }
+
+    return total
+  }
+
+  isValidOperand(operand){
+    this.operands.includes(operand)
+  }
+
+  convertToRomanNumeral(num){
+    let romanNumeral = '';
+    const properties = Object.keys(this.romanNumeralsToInt)
+
+    for (let i = properties.length - 1; i >= 0; i--) {
+      while (num >= this.romanNumeralsToInt[properties[i]] ) {
+        romanNumeral += properties[i];
+        
+        num -= this.romanNumeralsToInt[properties[i]];
+      }
+    }
+    
+    return romanNumeral;
+  }
+}
+
+
+// => MMXXIII - XX = MMIII
+// 2023 - 20 = 2003
+const input = "MMXXIII - XX"
+const calculator = new RomanNumeralCalculator()
+const result = calculator.calculate(input)
+
+console.log('expected: MMIII, actual: ', result)
