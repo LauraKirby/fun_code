@@ -1,7 +1,7 @@
 // ---------------------------------------
-// Handling Top-Level Async Functions
+// Handling Top-Level Async Function Calls
 // ---------------------------------------
-// wrap top-level async function in a self-invoking function
+// wrap top-level async function call in a self-invoking function
 void (async function main() {
   const resolvedMessage = await resolveAfter2Seconds();
   console.log(resolvedMessage);
