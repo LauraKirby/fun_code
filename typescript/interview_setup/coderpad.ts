@@ -1,9 +1,25 @@
+// ---------------------------------------
+// Handling Top-Level Async Functions
+// ---------------------------------------
 // wrap top-level async function in a self-invoking function
 void (async function main() {
   // const thirdAndThirdToLast = await findThirdAndThirdToLastPokemonType()
   // console.log(thirdAndThirdToLast)
+  const resolvedMessage = await resolveAfter2Seconds();
+  console.log(resolvedMessage);
 })();
 
+async function resolveAfter2Seconds() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("resolved");
+    }, 2000);
+  });
+}
+
+// ---------------------------------------
+// Using Testing Libraries:
+// ---------------------------------------
 // const chai = require('chai')
 const sinon = require("sinon");
 const sinonChai = require("sinon-chai");
